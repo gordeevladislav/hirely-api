@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Hirely.api": {
+    "Hirely.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
