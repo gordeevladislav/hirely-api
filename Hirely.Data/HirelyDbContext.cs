@@ -8,5 +8,7 @@ namespace Hirely.Data
     public HirelyDbContext(DbContextOptions options) : base(options)
     {
     }
+
+    public DbSet<User> Users { get; set; }
   }
 }
