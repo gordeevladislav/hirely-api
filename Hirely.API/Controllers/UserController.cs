@@ -23,7 +23,7 @@ namespace Hirely.API.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<UserDto>> GetUserById(long userId)
+    public async Task<ActionResult<UserDto>> GetUserById([FromQuery] long userId)
     {
       try
       {
@@ -37,12 +37,13 @@ namespace Hirely.API.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult<UserDto>> CreateUser(CreateUserRequest request)
+    public async Task<ActionResult<UserDto>> CreateUser([FromBody] CreateUserRequest request)
     {
       try
       {
         var user = await _userService.CreateAsync(request);
-        return user;
+
+        return Created(nameof(CreateUser), user);
       }
       catch (System.Exception ex)
       {
@@ -50,8 +51,8 @@ namespace Hirely.API.Controllers
       }
     }
 
-    [HttpPatch]
-    public async Task<ActionResult<UserDto>> UpdateUser(UpdateUserRequest request)
+    [HttpPut]
+    public async Task<ActionResult<UserDto>> UpdateUser([FromBody] UpdateUserRequest request)
     {
       try
       {
@@ -66,7 +67,7 @@ namespace Hirely.API.Controllers
     }
 
     [HttpDelete]
-    public async Task<ActionResult> DeleteUser(long userId)
+    public async Task<ActionResult> DeleteUser([FromQuery] long userId)
     {
       try
       {
