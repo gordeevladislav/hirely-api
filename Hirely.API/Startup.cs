@@ -1,6 +1,8 @@
 using Microsoft.OpenApi.Models;
 using Hirely.Data;
 using Microsoft.EntityFrameworkCore;
+using Hirely.API.Interfaces;
+using Hirely.API.Services;
 
 namespace API
 {
@@ -19,12 +21,17 @@ namespace API
       services.AddControllers();
       services.AddDbContext<HirelyDbContext>(x =>
       {
-        x.UseSqlite(_configuration.GetConnectionString("DefaultConnection"));
+        x.UseSqlite(
+          _configuration.GetConnectionString("DefaultConnection")
+        // b => b.MigrationsAssembly("Hirely.Data")
+        );
       });
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
       });
+
+      services.AddScoped<IUserService, UserService>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
