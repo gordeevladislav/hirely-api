@@ -3,6 +3,7 @@ using Hirely.API.Models.User;
 using Hirely.Data;
 using Hirely.Data.Entities;
 using Microsoft.EntityFrameworkCore;
+using Hirely.Common.Exceptions;
 
 namespace Hirely.API.Services
 {
@@ -18,7 +19,7 @@ namespace Hirely.API.Services
     {
       if (request.Username.Any(x => x == ' '))
       {
-        throw new Exception("Username shouldn't contain spaces");
+        throw new HirelyValidationException(nameof(request.Username), "Username shouldn't contain spaces");
       }
 
       var existingUser = await _db.Users.FirstOrDefaultAsync(
@@ -27,7 +28,7 @@ namespace Hirely.API.Services
 
       if (existingUser != null)
       {
-        throw new Exception("This user already exists");
+        throw new HirelyValidationException(nameof(request.Username), "This username is already exists");
       }
 
       var newUser = new User
@@ -57,7 +58,7 @@ namespace Hirely.API.Services
 
       if (user == null)
       {
-        throw new Exception($"User with Id={userId} is not found");
+        throw new HirelyNotFoundException($"User with Id={userId} is not found");
       }
 
       _db.Users.Remove(user);
@@ -71,7 +72,7 @@ namespace Hirely.API.Services
 
       if (user == null)
       {
-        throw new Exception($"User with Id={userId} is not found");
+        throw new HirelyNotFoundException($"User with Id={userId} is not found");
       }
 
       var dto = await _db.Users
@@ -97,7 +98,7 @@ namespace Hirely.API.Services
 
       if (user == null)
       {
-        throw new Exception($"User with Id={request.Id} is not found");
+        throw new HirelyNotFoundException($"User with Id={request.Id} is not found");
       }
 
       user.Username = request.Username;

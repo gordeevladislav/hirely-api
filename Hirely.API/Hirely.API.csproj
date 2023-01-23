@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hirely.Data\Hirely.Data.csproj" />
+    <ProjectReference Include="..\Hirely.Common\Hirely.Common.csproj" />
   </ItemGroup>
 
 </Project>

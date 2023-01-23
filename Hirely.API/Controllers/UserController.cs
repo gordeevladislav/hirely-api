@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Hirely.API.Models.User;
 using Hirely.API.Interfaces;
+using Hirely.Common.Exceptions;
 
 namespace Hirely.API.Controllers
 {
@@ -30,7 +31,7 @@ namespace Hirely.API.Controllers
         var user = await _userService.GetByIdAsync(userId);
         return user;
       }
-      catch (System.Exception ex)
+      catch (HirelyNotFoundException ex)
       {
         return NotFound(ex.Message);
       }
@@ -45,7 +46,7 @@ namespace Hirely.API.Controllers
 
         return Created(nameof(CreateUser), user);
       }
-      catch (System.Exception ex)
+      catch (HirelyValidationException ex)
       {
         return BadRequest(ex.Message);
       }
@@ -60,7 +61,7 @@ namespace Hirely.API.Controllers
 
         return user;
       }
-      catch (System.Exception ex)
+      catch (HirelyNotFoundException ex)
       {
         return NotFound(ex.Message);
       }
@@ -74,7 +75,7 @@ namespace Hirely.API.Controllers
         await _userService.DeleteAsync(userId);
         return Ok();
       }
-      catch (System.Exception ex)
+      catch (HirelyNotFoundException ex)
       {
         return NotFound(ex.Message);
       }
