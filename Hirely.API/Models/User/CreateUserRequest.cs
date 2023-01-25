@@ -9,7 +9,6 @@ namespace Hirely.API.Models.User
     [Required]
     [EmailAddress]
     public string Email { get; set; }
-    public string ProfileImageUrl { get; set; }
     public string Password { get; set; }
     [Required]
     public string FirstName { get; set; }

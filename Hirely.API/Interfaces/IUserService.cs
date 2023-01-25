@@ -1,4 +1,5 @@
 using Hirely.API.Models.User;
+using Hirely.Data.Entities;
 
 namespace Hirely.API.Interfaces
 {
@@ -9,5 +10,6 @@ namespace Hirely.API.Interfaces
     public Task<List<UserDto>> GetListAsync();
     public Task<UserDto> GetByIdAsync(long userId);
     public Task<UserDto> UpdateAsync(UpdateUserRequest request);
+    public Task<User> GetByUsernameAsync(string username);
   }
 }
