@@ -31,6 +31,7 @@ namespace API
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
       });
 
+      services.AddScoped<ITokenService, TokenService>();
       services.AddScoped<IUserService, UserService>();
     }
 

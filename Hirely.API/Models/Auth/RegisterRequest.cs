@@ -1,15 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Hirely.API.Models.User
+namespace Hirely.API.Models.Auth
 {
-  public class UpdateUserRequest
+  public class RegisterRequest
   {
-    [Range(1, long.MaxValue)]
-    public long Id { get; set; }
+    [Required]
     public string Username { get; set; }
     [Required]
     [EmailAddress]
     public string Email { get; set; }
+    public string Password { get; set; }
     [Required]
     public string FirstName { get; set; }
     [Required]

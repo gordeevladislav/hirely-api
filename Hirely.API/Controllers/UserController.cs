@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Hirely.API.Models.User;
 using Hirely.API.Interfaces;
 using Hirely.Common.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hirely.API.Controllers
 {
   [ApiController]
+  [Authorize]
   [Route("api/[controller]/[action]")]
   public class UserController : ControllerBase
   {

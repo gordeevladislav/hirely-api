@@ -35,7 +35,6 @@ namespace Hirely.API.Services
       {
         Username = request.Username,
         Email = request.Email,
-        ProfileImageUrl = request.ProfileImageUrl,
         Password = request.Password,
         FirstName = request.FirstName,
         LastName = request.LastName,
@@ -103,7 +102,6 @@ namespace Hirely.API.Services
 
       user.Username = request.Username;
       user.Email = request.Email;
-      user.ProfileImageUrl = request.ProfileImageUrl;
       user.FirstName = request.FirstName;
       user.LastName = request.LastName;
 
@@ -112,6 +110,18 @@ namespace Hirely.API.Services
       var updatedUser = await _db.Users.FirstOrDefaultAsync(x => x.Id == request.Id);
 
       return MapUserToDto(updatedUser);
+    }
+
+    public async Task<User> GetByUsernameAsync(string username)
+    {
+      var user = await _db.Users.FirstOrDefaultAsync(x => x.Username == username);
+
+      if (user == null)
+      {
+        throw new HirelyNotFoundException($"User with username {username} is not found");
+      }
+
+      return user;
     }
 
     private async Task<User> FindUserAsync(long userId)
@@ -127,7 +137,6 @@ namespace Hirely.API.Services
         Id = user.Id,
         Username = user.Username,
         Email = user.Email,
-        ProfileImageUrl = user.ProfileImageUrl,
         FirstName = user.FirstName,
         LastName = user.LastName,
       };
